@@ -3,9 +3,9 @@ import pkg from './package.json'
 
 export default defineManifest({
   manifest_version: 3,
-  name: 'Code Exporter for Gemini',
+  name: 'Code Exporter for Gemini: 20+ Languages, Canvas & Research',
   version: pkg.version,
-  description: 'Export code and Markdown from Gemini to .tsx, .py, .sql, and .md files with one click and automatic detection.',
+  description: 'Export from Gemini Chat, Canvas & Deep Research to 20+ languages (.py, .ts, .md & more). 1-click download with automatic detection',
   icons: {
     16: 'icons/icon16.png',
     32: 'icons/icon32.png',
