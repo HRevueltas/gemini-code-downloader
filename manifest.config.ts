@@ -19,6 +19,7 @@ export default defineManifest({
       32: 'icons/icon32.png',
     },
   },
+  permissions: ['storage'],
   content_scripts: [
     {
       js: ['src/content/main.ts'],

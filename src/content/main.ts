@@ -5,6 +5,8 @@ import { fallbackScrollExtraction, tryMarkdownExtraction, tryMonacoExtraction } 
 import { ExtractionResult } from '~/types';
 import { ICONS } from '~/constants/icons';
 
+import { incrementDownloadCountAndMaybeShowToast } from './reviewToast';
+
 const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 const SHORTCUT_KEY = isMac ? 'Ctrl+Shift+D' : 'Alt+Shift+D';
 const COPY_ICON = '<svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor"><path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM240-80q-33 0-56.5-23.5T160-160v-560h80v560h440v80H240Zm120-240v-480 480Z"/></svg>';
@@ -59,6 +61,7 @@ async function handleDownload(btn: HTMLButtonElement, selectElement: HTMLSelectE
         downloadBlob(extractionResult.code, filename, details.type);
 
         updateBtnSuccess(btn, filename);
+        incrementDownloadCountAndMaybeShowToast();
 
     } catch (err) {
         console.error(err);
@@ -278,6 +281,7 @@ function handleCodeBlockDownload(codeBlock: Element, btn: HTMLButtonElement, lan
             btn.classList.remove('success');
         }, 3000);
 
+        incrementDownloadCountAndMaybeShowToast();
     } catch (err) {
         console.error(err);
         btn.innerHTML = ICONS.DOWNLOAD;
