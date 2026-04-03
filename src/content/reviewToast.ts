@@ -139,17 +139,7 @@ function showReviewPrompt() {
     <div class="ce-header">
       <div class="ce-header-left">
         <div class="ce-icon">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="ce-bolt-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FF3B30"/>
-                <stop offset="45%" stop-color="#FFCC00"/>
-                <stop offset="75%" stop-color="#28CD41"/>
-                <stop offset="100%" stop-color="#00C7BE"/>
-              </linearGradient>
-            </defs>
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="url(#ce-bolt-grad)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          ⚡
         </div>
         <div>
           <div class="ce-title">Enjoying Code Exporter?</div>
@@ -190,6 +180,7 @@ function showReviewPrompt() {
 
     document.getElementById('ce-review-later')?.addEventListener('click', () => {
         chrome.storage.local.set({ ce_download_count: -25 });
+        toast.remove();
         style.remove();
     });
 
