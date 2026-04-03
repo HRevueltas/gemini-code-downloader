@@ -1,33 +1,33 @@
 export async function incrementDownloadCountAndMaybeShowToast() {
-    try {
-        const data = await chrome.storage.local.get(['ce_download_count', 'ce_has_reviewed']);
+  try {
+    const data = await chrome.storage.local.get(['ce_download_count', 'ce_has_reviewed']);
 
-        if (data.ce_has_reviewed) {
-            return;
-        }
-
-        let count = Number(data.ce_download_count) || 0;
-        count++;
-
-        await chrome.storage.local.set({ ce_download_count: count });
-
-        if (count === 5) {
-            showReviewPrompt();
-            await chrome.storage.local.set({ ce_download_count: -15 });
-        }
-    } catch (err) {
-        console.error('Error handling review toast', err);
+    if (data.ce_has_reviewed) {
+      return;
     }
+
+    let count = Number(data.ce_download_count) || 0;
+    count++;
+
+    await chrome.storage.local.set({ ce_download_count: count });
+
+    if (count === 5) {
+      showReviewPrompt();
+      await chrome.storage.local.set({ ce_download_count: -15 });
+    }
+  } catch (err) {
+    console.error('Error handling review toast', err);
+  }
 }
 
 function showReviewPrompt() {
-    if (document.getElementById('ce-review-toast')) return;
+  if (document.getElementById('ce-review-toast')) return;
 
-    const toast = document.createElement('div');
-    toast.id = 'ce-review-toast';
+  const toast = document.createElement('div');
+  toast.id = 'ce-review-toast';
 
-    const style = document.createElement('style');
-    style.textContent = `
+  const style = document.createElement('style');
+  style.textContent = `
     #ce-review-toast {
       position: fixed;
       bottom: 24px;
@@ -135,7 +135,7 @@ function showReviewPrompt() {
     }
   `;
 
-    toast.innerHTML = `
+  toast.innerHTML = `
     <div class="ce-header">
       <div class="ce-header-left">
         <div class="ce-icon">
@@ -167,27 +167,27 @@ function showReviewPrompt() {
     <p class="ce-footer">Takes less than 30 seconds · opens Chrome Web Store</p>
   `;
 
-    document.body.appendChild(style);
-    document.body.appendChild(toast);
+  document.body.appendChild(style);
+  document.body.appendChild(toast);
 
-    const handleDismiss = () => {
-        chrome.storage.local.set({ ce_download_count: -15 }); // Reset back to a lower count 
-        toast.remove();
-        style.remove();
-    };
+  const handleDismiss = () => {
+    chrome.storage.local.set({ ce_download_count: -15 }); // Reset back to a lower count 
+    toast.remove();
+    style.remove();
+  };
 
-    document.getElementById('ce-dismiss')?.addEventListener('click', handleDismiss);
+  document.getElementById('ce-dismiss')?.addEventListener('click', handleDismiss);
 
-    document.getElementById('ce-review-later')?.addEventListener('click', () => {
-        chrome.storage.local.set({ ce_download_count: -25 });
-        toast.remove();
-        style.remove();
-    });
+  document.getElementById('ce-review-later')?.addEventListener('click', () => {
+    chrome.storage.local.set({ ce_download_count: -25 });
+    toast.remove();
+    style.remove();
+  });
 
-    document.getElementById('ce-review-yes')?.addEventListener('click', () => {
-        chrome.storage.local.set({ ce_has_reviewed: true });
-        window.open('https://chromewebstore.google.com/detail/code-exporter-for-gemini/gaidnbkpdfpjeoejpklfnmjckmeociip/reviews', '_blank');
-        toast.remove();
-        style.remove();
-    });
+  document.getElementById('ce-review-yes')?.addEventListener('click', () => {
+    chrome.storage.local.set({ ce_has_reviewed: true });
+    window.open('https://chromewebstore.google.com/detail/code-exporter-for-gemini/gaidnbkpdfpjeoejpklfnmjckmeociip/reviews', '_blank');
+    toast.remove();
+    style.remove();
+  });
 }
