@@ -1,7 +1,7 @@
 import './styles.css';
 import { detectLanguage, LANG_TO_EXT } from '../logic/languageDetector';
 import { downloadBlob, getFileName } from './utils';
-import { fallbackScrollExtraction, tryMarkdownExtraction, tryMonacoExtraction } from './extractor';
+import { fallbackScrollExtraction, tryMarkdownExtractionWithSources, tryMonacoExtraction } from './extractor';
 import { ExtractionResult } from '~/types';
 import { ICONS } from '~/constants/icons';
 
@@ -12,7 +12,7 @@ const SHORTCUT_KEY = isMac ? 'Ctrl+Shift+D' : 'Alt+Shift+D';
 const COPY_ICON = '<svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor"><path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM240-80q-33 0-56.5-23.5T160-160v-560h80v560h440v80H240Zm120-240v-480 480Z"/></svg>';
 
 async function resolveExtraction(btn: HTMLButtonElement): Promise<ExtractionResult> {
-    let extractionResult: ExtractionResult | null = tryMarkdownExtraction();
+    let extractionResult: ExtractionResult | null = await tryMarkdownExtractionWithSources();
 
     if (!extractionResult) {
         try {
