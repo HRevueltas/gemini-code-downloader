@@ -20,6 +20,10 @@ export default defineManifest({
       32: 'icons/icon32.png',
     },
   },
+  background: {
+    service_worker: 'src/background/main.ts',
+    type: 'module',
+  },
   permissions: ['storage'],
   content_scripts: [
     {
