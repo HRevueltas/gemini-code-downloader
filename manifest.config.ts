@@ -14,6 +14,7 @@ export default defineManifest({
   },
   action: {
     default_title: 'Code Exporter for Gemini',
+    default_popup: 'src/popup/index.html',
     default_icon: {
       16: 'icons/icon16.png',
       32: 'icons/icon32.png',

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Exporter Settings</title>
+</head>
+
+<body>
+    <main class="popup-root" aria-live="polite">
+        <section class="card">
+            <p class="eyebrow">Deep Research</p>
+            <h1>Save sources in Markdown</h1>
+            <p class="subtitle">Append the source list at the end of exported Markdown documents.</p>
+
+            <label class="switch-row" for="include-sources-toggle">
+                <span class="switch-copy">
+                    <span class="switch-title">Include final sources section</span>
+                    <span class="switch-description">Disabled by default</span>
+                </span>
+                <button id="include-sources-toggle" class="switch" type="button" role="switch" aria-checked="false"
+                    aria-label="Include Deep Research sources">
+                    <span class="switch-thumb" aria-hidden="true"></span>
+                </button>
+            </label>
+
+            <p id="status" class="status">Sources disabled</p>
+        </section>
+    </main>
+
+    <script type="module" src="./main.ts"></script>
+</body>
+
+</html>
